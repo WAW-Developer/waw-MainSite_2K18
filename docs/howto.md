@@ -7,7 +7,8 @@ At the **root directory** there are the **"package.json"** and **"readme.md"** f
 Also in the root are the files:
  * **"gulpfile.js"**: gulp tasks 
  * **"webpack.config.babel.js"**: webpack file for babel transpilation
-
+ * **".babelrc"**: configuration file for babel transpilation
+ 
 The repository of the site has **different folders for different purposes**.
 
 ### docs
@@ -60,8 +61,8 @@ Normally install all by typing **"npm install"**
     
   - **webpack**
   
-    npm install webpack --save-dev
-    
+    npm install webpack webpack-cli --save-dev
+
   - **babel**
   
     npm install babel-core babel-loader babel-preset-env --save-dev
