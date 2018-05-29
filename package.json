@@ -1,0 +1,15 @@
+{
+  "name": "WAW_Site_2k18",
+  "version": "0.0.1a",
+  "description": "Is an HTML5 application for provide the different information that are in WAW blogs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "nodejs node_modules/webpack/bin/webpack.js --config webpack.config.babel.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
