@@ -6,10 +6,10 @@ import {PolymerElement, html} from '../../thirds/polymer/polymer-element.js';
 // Import function 'afterNextRender'
 import {afterNextRender} from '../../thirds/polymer/lib/utils/render-status.js';
 
-//Import template repeater
+// Import template repeater
 import '../../thirds/polymer/lib/elements/dom-repeat.js';
 
-//Import template
+// Import template
 import _template from './webc-waw-topics-list-template.js';
 
 
