@@ -85,10 +85,26 @@ gulp.task('copy_LibsFor_Polymer', function(_done) {
 });
 
 
-gulp.task('copy_Libs', function(_done) {
+gulp.task('copy_Libs_ThirdParty', function(_done) {
   runSequence(['copy_LibsFor_Webcomponents', 'copy_LibsFor_LitHTML', 'copy_LibsFor_Polymer'],
       _done);
 });
+
+
+gulp.task('copy_AppLib', function(_done) {
+  
+  let _target_path = _EcmTys_FACTORY.dist_Path + 'lib/'; 
+  
+  gulp.src([
+      './lib_dist/**/*'
+      ],
+
+      { base : './lib_dist/' })
+      .pipe(gulp.dest(_target_path))
+      .on('end', _done);
+  
+});
+
 
 
 gulp.task('copy_Code', function(_done) {
@@ -107,7 +123,7 @@ gulp.task('copy_Code', function(_done) {
 
 
 gulp.task('all', function(_callback) {
-  runSequence('clean', 'copy_Libs', 'copy_Code',
+  runSequence('clean', 'copy_Libs_ThirdParty', 'copy_AppLib', 'copy_Code',
               _callback);
 });
 

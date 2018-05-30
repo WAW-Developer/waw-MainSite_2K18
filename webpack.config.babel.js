@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: 'waw-mainsite_Lib.bundle.js',
     path: resolve(__dirname, 'lib_dist'),
-    library: 'waw.mainsite',
+    library: 'waw_mainsite',
     libraryTarget:'umd'
   },
   module: {
