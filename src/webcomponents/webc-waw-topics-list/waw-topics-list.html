@@ -1,0 +1,180 @@
+
+<dom-module id="waw-topics-list">
+  
+  <link rel="import" type="css" href="../js/tether/tether.min.css">
+  
+  <link rel="import" type="css" href="../js/bootstrap/js/bootstrap.min.css">
+  
+  <link rel="import" type="css" href="../resources/styles/waw_styles.css">
+  
+  
+  <template>
+    <style>
+      /* local styles go here */
+/*       :host { */
+/*         display: block; */
+/*       } */
+    </style>
+
+
+    <div class="list-group card">
+      <div class="card-header">
+        <h3 class="panel-title">Topics list</h3>
+      </div>
+      
+      <div class="card-body">
+      <template id="topics_list" is="dom-repeat" items="{{topics}}" as="_topic">
+        
+        <a href="javascript:void(null);" 
+            class$="card-block list-group-item {{_topic_Class(_topic._model.selected)}}"
+            data-target$="[[_topic.id]]"
+            on-click="_itemclicked">
+          
+            <div>
+              <div class="img-thumbnail w-25 float-right" 
+                style="max-height: 172px;">
+                <img alt="..." class$="img-fluid {{_topicImage_Class(_topic._model.selected)}}"
+                  style="max-height: 172px;" 
+                  src$="resources/images/{{_topic.iconImage}}">
+              </div>
+            
+              <h4 class="list-group-item-heading">{{_topic.name}}</h4> 
+              <p class="list-group-item-text">{{_topic.description}}</p>
+            </div>
+            
+        </a>
+        
+      </template>
+      </div>  
+      
+    </div>
+    
+    
+  </template>
+
+
+   <script>
+   
+   class WAW_TopicsList extends Polymer.Element {
+       static get is() { return "waw-topics-list"; }
+       static get properties() {
+         return {
+           mode: {
+               type: String,
+               value: 'auto'
+             },
+
+             topics: {
+                 type: Array,
+                 reflectToAttribute: true,
+                 notify: true,
+                 value: function() { return []; }
+
+             }
+         }
+       }
+       
+       
+       constructor() {
+         super();
+//          this.textContent = "I'm a custom-element.";
+       }
+       
+       connectedCallback() {
+         super.connectedCallback();
+       }
+
+       
+       _itemclicked(_e, _topic) {
+
+         var _this = this;
+         var _data_target = _e.model.__data._topic.id;
+           
+         _this.set_active_topic({
+             'topic': _data_target
+         });
+         
+//          _this.fire('itemclicked', {
+//              'data-target': _data_target
+//              });
+           
+         var _event_Detail = {
+             'data-target': _data_target
+         };
+
+         _this.dispatchEvent(new CustomEvent('itemclicked', {
+             'detail': _event_Detail
+         }));
+  
+         
+         
+           // .srcElement.childNodes["0"].data
+           // .srcElement.attributes[1]
+       }
+       
+       
+       _topic_Class(_selected) {
+
+           return _selected === true ? 'active' : '';
+       }
+
+       
+       _topicImage_Class(_selected) {
+
+           return _selected === true ? 'blinking' : '';
+       }
+       
+       set_topics(_options) {
+           
+           var _this = this;
+           var _topics = _options.topics;
+           
+           // clear an array
+           _this.set('topics', []);
+
+           _topics.forEach(function(_item, _id){
+//                _data.topics.push(_item);
+
+               _item._model = (_item._model !== undefined) ? _item._model : {};
+               
+               // _item._model.selected = (_item._model.selected === true) ? true : false;
+               _item._model.selected = false;
+
+               _this.push('topics', _item);
+           });
+
+       }
+       
+       
+       set_active_topic(_options) {
+           
+           var _this = this;
+           var _topics = _this.topics;
+//            var _topics = _this.data.topics.slice(0);
+
+          // Check options
+          _options = (_options === undefined) ? {} : _options;
+
+          // Check options.topic
+          var _topic_ID = (_options.topic !== undefined) ? _options.topic : null;
+
+          // Check options.none
+          var _none = (_options.none !== undefined ) ? _options.none : false;
+           
+           _topics.forEach(function(_topic, _i) {
+//                _topic._model.selected = _topic.id === _topic_ID ? true: false;
+               _this.set('topics.' + _i + '._model.selected', ((_topic.id === _topic_ID) && (_none !== true)) ? true : false);
+           });
+               
+       }
+       
+   }
+   
+   // Register the new element with the browser
+   customElements.define(WAW_TopicsList.is, WAW_TopicsList);
+   
+   
+  </script>
+    
+    
+</dom-module>
