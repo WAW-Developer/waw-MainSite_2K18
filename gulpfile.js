@@ -106,7 +106,6 @@ gulp.task('copy_AppLib', function(_done) {
 });
 
 
-
 gulp.task('copy_Code', function(_done) {
   
   let _target_path = _EcmTys_FACTORY.dist_Path; 
@@ -121,9 +120,22 @@ gulp.task('copy_Code', function(_done) {
 });
 
 
+gulp.task('copy_Resources', function(_done) {
+  
+  let _target_path = _EcmTys_FACTORY.dist_Path; 
+  
+  gulp.src([
+      './resources/**/*'
+      ],
+
+      { base : './' })
+      .pipe(gulp.dest(_target_path))
+      .on('end', _done);
+  
+});
 
 gulp.task('all', function(_callback) {
-  runSequence('clean', 'copy_Libs_ThirdParty', 'copy_AppLib', 'copy_Code',
+  runSequence('clean', 'copy_Libs_ThirdParty', 'copy_AppLib', 'copy_Code', 'copy_Resources',
               _callback);
 });
 
