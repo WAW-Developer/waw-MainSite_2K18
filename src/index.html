@@ -27,10 +27,7 @@
       Load all the necessary files for use Bootstrap library
   -->
 
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
-
 
   <!-- -----------------------------------------------------------------------------------------------------------------------------------
       EndOf
@@ -38,6 +35,8 @@
 
   -->  
   
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
   
   <!-- Font awesome -->
 <!--   <link rel="stylesheet" href="./js/font-awesome/css/font-awesome.min.css"> -->
@@ -77,11 +76,11 @@
   <script type="module" src="webcomponents/webc-waw-topic-detail/webc-waw-topic-detail.js"></script>
   <script type="module" src="webcomponents/webc-waw-topics-list/webc-waw-topics-list.js"></script>
   <script type="module" src="webcomponents/webc-waw-posts-list/webc-waw-posts-list.js"></script>
-  
+  <script type="module" src="webcomponents/webc-waw-blog-data/webc-waw-blog-data.js"></script>
+
   
   <script>
  
-      
      var _init_elements = function() {
           
         var _elements_required = [
@@ -245,7 +244,7 @@
   </div>
     
   <div class="container-fluid" style="padding: 0px;">
-<!--     <waw-blog-data></waw-blog-data> -->
+    <webc-waw-blog-data></webc-waw-blog-data>
   </div>
   
     
