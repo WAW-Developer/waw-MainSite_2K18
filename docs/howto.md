@@ -17,6 +17,12 @@ Contains **information** about the project
 ### src
 Contains the **development files** that has to be **processed before being served**.
 
+### lib_src
+Contains the **development files** for the application library that has to be **transpiled before being served**.
+
+### lib_dist
+Contains the **distribution files** for the application library.
+
 ### public
 Contains the **static public files** that has to be **provided using an HTTP service**. 
 
@@ -42,10 +48,14 @@ Normally install all by typing **"npm install"**
   - **@webcomponents/webcomponentsjs**
   
     npm install @webcomponents/webcomponentsjs --save-dev
+    
+  - **@webcomponents/shadycss**
   
-  - **polymer**
+    npm install @webcomponents/shadycss --save-dev
   
-    npm install polymer --save-dev
+  - **@polymer/polymer**
+  
+    npm install @polymer/polymer --save-dev
   
   - **gulp**
   
