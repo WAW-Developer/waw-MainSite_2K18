@@ -182,6 +182,14 @@ gulp.task('preprocess_js', function(_done) {
 });
 
 
+
+gulp.task('copyAndpreprocess_code', function(_done) {
+  runSequence('copy_Code', 'preprocess_html', 'preprocess_js',
+      _done);
+});
+
+
+
 gulp.task('copy_Resources', function(_done) {
   
   let _target_path = _EcmTys_FACTORY.dist_Path; 
@@ -198,7 +206,7 @@ gulp.task('copy_Resources', function(_done) {
 
 gulp.task('all', function(_callback) {
   runSequence('clean', 'copy_Libs_ThirdParty', 'copy_AppLib', 
-      'copy_Code', 'preprocess_html', 'preprocess_js', 
+      'copyAndpreprocess_code', 
       'copy_Resources',
       _callback);
 });
