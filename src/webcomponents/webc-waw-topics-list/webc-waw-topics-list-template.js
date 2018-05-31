@@ -40,7 +40,7 @@ class Template {
               <div class="img-thumbnail w-25 float-right" 
                 style="max-height: 172px;">
                 <img alt="..." class$="img-fluid {{_topicImage_Class(_topic._model.selected)}}"
-                  style="max-height: 172px;" 
+                  style="max-height: 53pt;" 
                   src$="resources/images/{{_topic.iconImage}}">
               </div>
             

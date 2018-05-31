@@ -171,16 +171,16 @@ class WAW_BlogProperties extends PolymerElement {
   
   _click_tab(_event) {
     
-    console.log('WebC_BlogProperties _click_tab');    // TODO: REMOVE DEBUG LOG
-    console.log(_event);    // TODO: REMOVE DEBUG LOG
+    // console.log('WebC_BlogProperties _click_tab');    // TODO: REMOVE DEBUG LOG
+    // console.log(_event);    // TODO: REMOVE DEBUG LOG
     
     // let _index = _event.model.index;
     // let _item = _event.model._entityItem;
     let _target = _event.target;
-    console.info('target is:', _target);  // TODO: REMOVE DEBUG LOG
+    // console.info('target is:', _target);  // TODO: REMOVE DEBUG LOG
     
     let _data_name = _target.getAttribute("data-name");
-    console.info('data-name is:', _data_name); // TODO: REMOVE DEBUG LOG
+    // console.info('data-name is:', _data_name); // TODO: REMOVE DEBUG LOG
     
     let _tabs = this.get('data._tabs');
     let _tabs_contents = this.get('data._tabs_contents');
