@@ -2,13 +2,17 @@
   "name": "WAW_Site_2k18",
   "version": "0.0.1a",
   "description": "Is an HTML5 application for provide the different information that are in WAW blogs.",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node node_modules/webpack/bin/webpack.js --config webpack.config.babel.js"
   },
-  "author": "",
+  "author": "WAW developer <waw.developer@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/WAW-Developer/waw-MainSite_2K18.git"
+  },
   "dependencies": {},
   "devDependencies": {
     "@polymer/polymer": "^3.0.2",

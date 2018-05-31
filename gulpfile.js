@@ -12,6 +12,14 @@ const _EcmTys_FACTORY = {
 };
 
 
+// Options for preprocess
+_EcmTys_FACTORY.preprocess_Options = {
+  context: {
+      version : pjson.version + '.build' + _EcmTys_FACTORY.build
+  }
+};
+
+
 gulp.task("clean", function (_done) {
   // return del("build");
   let _target_path = _EcmTys_FACTORY.dist_Path + '**';
@@ -140,9 +148,7 @@ gulp.task('preprocess_html', function(_done) {
       { base : _target_path })
       
       .pipe(preprocess({
-          context: {
-              version : pjson.version + '.build' + _EcmTys_FACTORY.build
-          }
+          context: _EcmTys_FACTORY.preprocess_Options.context
       })) //To set environment variables in-line
       
       .pipe(gulp.dest(_target_path))
@@ -161,15 +167,14 @@ gulp.task('preprocess_js', function(_done) {
   let _target_path = _EcmTys_FACTORY.dist_Path; 
   
   gulp.src([
-      _target_path + '/**/*.js'
+      _target_path + '/**/*.js',
+      '!' + _target_path + '/thirds/**/*'
       ],
 
       { base : _target_path })
       
       .pipe(preprocess({
-          context: {
-              version : pjson.version + '.build' + _EcmTys_FACTORY.build
-          }
+          context: _EcmTys_FACTORY.preprocess_Options.context
       })) //To set environment variables in-line
       
       .pipe(gulp.dest(_target_path))
