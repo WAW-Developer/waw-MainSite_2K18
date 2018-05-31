@@ -59,7 +59,7 @@ Normally install all by typing **"npm install"**
   
   - **gulp**
   
-    npm install gulp --save-dev  
+    npm install gulp --save-dev
   
   - **del**
   
@@ -68,6 +68,10 @@ Normally install all by typing **"npm install"**
   - **run-sequence**
   
     npm install run-sequence --save-dev
+  
+  - **gulp-preprocess**
+  
+    npm install gulp-preprocess --save-dev
     
   - **webpack**
   

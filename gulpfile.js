@@ -2,11 +2,13 @@ var pjson = require('./package.json');
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var del = require('del');
+var preprocess = require('gulp-preprocess');
 
 
 const _EcmTys_FACTORY = {
     dist_Path: './public/',
-    ThirdParty_Path: 'thirds/'
+    ThirdParty_Path: 'thirds/',
+    build: '0010'
 };
 
 
@@ -115,7 +117,67 @@ gulp.task('copy_Code', function(_done) {
       ],
 
       { base : './src/' })
+      
+      .pipe(preprocess({
+          context: {
+              version : pjson.version + '.build' + _EcmTys_FACTORY.build
+          }
+      })) //To set environment variables in-line
+      
       .pipe(gulp.dest(_target_path))
+      .on('end', _done);
+});
+
+
+gulp.task('preprocess_html', function(_done) {
+  
+  let _target_path = _EcmTys_FACTORY.dist_Path; 
+  
+  gulp.src([
+      _target_path + '/**/*.html'
+      ],
+
+      { base : _target_path })
+      
+      .pipe(preprocess({
+          context: {
+              version : pjson.version + '.build' + _EcmTys_FACTORY.build
+          }
+      })) //To set environment variables in-line
+      
+      .pipe(gulp.dest(_target_path))
+      
+//      .pipe(gulp.dest(function (file) {
+//              return file.base;
+//          }))
+      
+      .on('end', _done);
+});
+
+
+
+gulp.task('preprocess_js', function(_done) {
+  
+  let _target_path = _EcmTys_FACTORY.dist_Path; 
+  
+  gulp.src([
+      _target_path + '/**/*.js'
+      ],
+
+      { base : _target_path })
+      
+      .pipe(preprocess({
+          context: {
+              version : pjson.version + '.build' + _EcmTys_FACTORY.build
+          }
+      })) //To set environment variables in-line
+      
+      .pipe(gulp.dest(_target_path))
+      
+//      .pipe(gulp.dest(function (file) {
+//              return file.base;
+//          }))
+      
       .on('end', _done);
 });
 
@@ -135,8 +197,10 @@ gulp.task('copy_Resources', function(_done) {
 });
 
 gulp.task('all', function(_callback) {
-  runSequence('clean', 'copy_Libs_ThirdParty', 'copy_AppLib', 'copy_Code', 'copy_Resources',
-              _callback);
+  runSequence('clean', 'copy_Libs_ThirdParty', 'copy_AppLib', 
+      'copy_Code', 'preprocess_html', 'preprocess_js', 
+      'copy_Resources',
+      _callback);
 });
 
 

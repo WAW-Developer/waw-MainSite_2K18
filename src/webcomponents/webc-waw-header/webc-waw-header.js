@@ -197,7 +197,7 @@ class WAW_Header extends PolymerElement {
   
   _download_config() {
     // window.location.href = "js/config.json";
-    window.open('config/config.json');
+    window.open('config/config.json?v=/* @echo version */');
   }
   
   
