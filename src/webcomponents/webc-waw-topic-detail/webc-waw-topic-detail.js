@@ -73,11 +73,11 @@ class WAW_TopicDetail extends PolymerElement {
     
     _this.set('data.initialized', true);
     
-    // let _shadowRoot = _this.shadowRoot;
-
-    // this.set('data._tabs', _shadowRoot.querySelectorAll('ul[role="tablist"] li.nav-item a.nav-link'));
-    // this.set('data._tabs_contents', _shadowRoot.querySelectorAll('div.tab-content div[role="tabpanel"]'));
+    let _shadowRoot = _this.shadowRoot;
     
+    this.set('data._layer_img', _shadowRoot.querySelector('div[data-name="image"]'));
+    this.set('data._button_blog', _shadowRoot.querySelector('a.btn[data-name="blog"]'));
+    this.set('data._button_info', _shadowRoot.querySelector('a.btn[data-name="information"]'));
   }
   
   
@@ -86,11 +86,10 @@ class WAW_TopicDetail extends PolymerElement {
       var _topic = _this.get('data.topic');
       
       var _JQ = jQuery;
-
-      var _layer_img = _JQ(_this.shadowRoot).find('div[data-name="image"]');
-      var _button_blog = _JQ(_this.shadowRoot).find('a.btn[data-name="blog"]');
-      var _button_info = _JQ(_this.shadowRoot).find('a.btn[data-name="information"]');
-
+      
+      let _layer_img = this.get('data._layer_img');
+      let _button_blog = this.get('data._button_blog');
+      let _button_info = this.get('data._button_info');
 
       if (_topic.iconImage !== undefined && 
               _topic.iconImage !== null ) {
@@ -135,7 +134,8 @@ class WAW_TopicDetail extends PolymerElement {
     }
     
     
-    Polymer.dom(_this.$.description).innerHTML =_description;
+    // Polymer.dom(_this.$.description).innerHTML =_description;
+    _this.$.description.innerHTML =_description;
     
     _this._update();
     

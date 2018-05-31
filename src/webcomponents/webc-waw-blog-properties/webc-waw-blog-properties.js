@@ -91,6 +91,9 @@ class WAW_BlogProperties extends PolymerElement {
     
     this.set('data._tabs', _shadowRoot.querySelectorAll('ul[role="tablist"] li.nav-item a.nav-link'));
     this.set('data._tabs_contents', _shadowRoot.querySelectorAll('div.tab-content div[role="tabpanel"]'));
+    this.set('data._layer_loading', _shadowRoot.querySelector('div[data-name="loading"]'));
+
+    
   }
   
   _category_Class(_selected) {
@@ -118,7 +121,7 @@ class WAW_BlogProperties extends PolymerElement {
       var _rss_loaded = (_topic._model._rss.loaded !== undefined) ? _topic._model._rss.loaded : false;
 
       // Update layer for loading
-      var _layer_loading = _JQ(_this.shadowRoot).find('div[data-name="loading"]');
+      let _layer_loading = this.get('data._layer_loading');
       _JQ(_layer_loading).toggle(!_rss_loaded);
 
       // Refresh categories

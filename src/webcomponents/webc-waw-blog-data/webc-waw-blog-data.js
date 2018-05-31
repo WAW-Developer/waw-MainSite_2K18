@@ -85,10 +85,15 @@ class WAW_BlogData extends PolymerElement {
     
     _this.set('data.initialized', true);
     
-    // let _shadowRoot = _this.shadowRoot;
+    let _shadowRoot = _this.shadowRoot;
     
     // this.set('data._tabs', _shadowRoot.querySelectorAll('ul[role="tablist"] li.nav-item a.nav-link'));
     // this.set('data._tabs_contents', _shadowRoot.querySelectorAll('div.tab-content div[role="tabpanel"]'));
+    
+    this.set('data._layer_chart_CategoriesUsed', _shadowRoot.querySelector('canvas[data-name="chart_CategoriesUsed"]'));
+    this.set('data._layer_chart_CategoriesLinked', _shadowRoot.querySelector('canvas[data-name="chart_CategoriesLinked"]'));
+    this.set('data._layer_chart_PostsOverTime', _shadowRoot.querySelector('canvas[data-name="chart_PostsOverTime"]'));
+
   }
   
   _init_chart_CategoriesUsed(_options) {
@@ -131,7 +136,7 @@ class WAW_BlogData extends PolymerElement {
       _chart_labels.push('others');
       _chart_data.push(_others);
       
-      var _layer_chart_CategoriesUsed = _JQ(_this.shadowRoot).find('canvas[data-name="chart_CategoriesUsed"]');
+      let _layer_chart_CategoriesUsed = this.get('data._layer_chart_CategoriesUsed');
 
       var _data = {
           labels: _chart_labels,
@@ -200,8 +205,7 @@ class WAW_BlogData extends PolymerElement {
           _chart_data.push(_item._model._rss_data.related_categories.length);
       });
 
-      
-      var _layer_chart_CategoriesLinked = _JQ(_this.shadowRoot).find('canvas[data-name="chart_CategoriesLinked"]');
+      let _layer_chart_CategoriesLinked = this.get('data._layer_chart_CategoriesLinked');
       
       var _data = {
           datasets: [{
@@ -260,8 +264,7 @@ class WAW_BlogData extends PolymerElement {
          _chart_data.push(_feed_DATA.entries_by_year[_i_year].length);
       }
       
-      
-      var _layer_chart_PostsOverTime = _JQ(_this.shadowRoot).find('canvas[data-name="chart_PostsOverTime"]');
+      let _layer_chart_PostsOverTime = this.get('data._layer_chart_PostsOverTime');
 
       var _data = {
           labels: _chart_labels,
@@ -326,12 +329,11 @@ class WAW_BlogData extends PolymerElement {
             var _loading = (_options.loading !== undefined) ? _options.loading : false;
 
             // Update layer for loading
-            var _layer_loading = _JQ(_this.shadowRoot).find('div.waw-chart div[data-name="loading"]');
-            var _layer_content = _JQ(_this.shadowRoot).find('div.waw-chart div[data-name="content"]');
+            let _layers_loading = _this.shadowRoot.querySelectorAll('div[data-name="loading"]');
+            let _layers_content = _this.shadowRoot.querySelectorAll('div[data-name="content"]');
             
-            
-            _JQ(_layer_loading).toggle(_loading);
-            _JQ(_layer_content).toggle(!_loading);
+            _JQ(_layers_loading).toggle(_loading);
+            _JQ(_layers_content).toggle(!_loading);
             
             // resolve with some time extra for animations...
             setTimeout(function() { 

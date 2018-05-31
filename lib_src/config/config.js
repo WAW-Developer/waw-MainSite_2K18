@@ -88,4 +88,12 @@ const _config = {
 
 // module.exports = _config;
 
+const _export_initialize = _config.initialize;
+const _export_loadConfig = _config.loadConfig;
+
+export {
+  _export_initialize as initialize,
+  _export_loadConfig as loadConfig
+};
+
 export default _config;

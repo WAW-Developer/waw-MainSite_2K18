@@ -22,7 +22,8 @@ const _ui = {
       'topic_detail': null,
       'topics_list': null,
       'blog_properties': null,
-      'posts_list': null
+      'posts_list': null,
+      'blog_data': null
     },
     
     '_current_topic': {
@@ -258,6 +259,27 @@ const _ui = {
         _ui._components.posts_list = _element;
         
     },  // EndOf _initialize_posts_list
+    
+    
+    '_initialize_blog_data': function(_options) {
+
+      _options = (_options !== undefined) ? _options : {};
+      
+      if (_options.component === undefined) {
+          throw ('component option is required.');
+      }
+      let _component = _options.component;
+      
+      let _config = (_options.config !== undefined) ? _options.config : config_mod.get_current_config();
+      
+      let _JQ = _config.jquery_Lib;
+      
+      let _element = _JQ(_component)[0];
+      
+      _ui._components.blog_data = _element;
+
+      
+  },  // EndOf _initialize_blog_data
 
         
     'initialize_UI': function(_options) {
@@ -278,28 +300,33 @@ const _ui = {
         
         _ui._initialize_header({
             'config': _config,
-            'component': 'waw-header'
+            'component': 'webc-waw-header'
         });
         
         _ui._initialize_topic_detail({
             'config': _config,
-            'component': 'waw-topic-detail'
+            'component': 'webc-waw-topic-detail'
         });
         
         _ui._initialize_topics_list({
             'config': _config,
-            'component': 'waw-topics-list'
+            'component': 'webc-waw-topics-list'
         });
         
         _ui._initialize_blog_properties({
             'config': _config,
-            'component': 'waw-blog-properties'
+            'component': 'webc-waw-blog-properties'
         });
 
         _ui._initialize_posts_list({
             'config': _config,
-            'component': 'waw-posts-list'
+            'component': 'webc-waw-posts-list'
         });
+        
+        _ui._initialize_blog_data({
+          'config': _config,
+          'component': 'webc-waw-blog-data'
+      });
         
         _ui.set_current_topic({
             'isRootTopic': true,
@@ -416,77 +443,99 @@ const _ui = {
     
     
     '_manage_rss': function(_options) {
-        
-        if (_options === undefined) {
-            _options = {};
-        }
+      
+      if (_options === undefined) {
+          _options = {};
+      }
 
-        let _config = (_options.config !== undefined) ? _options.config : config_mod.get_current_config();
-        
-        if (_options.topic === undefined) {
-            throw ('topic option is required.');
-        }
-        let _topic = _options.topic;
-        
-        
-        if (_topic.url_feed === undefined) {    // Feed URL is required
-            return;
-        }
-        
-        if (_topic._model._rss === undefined) {   
-            _topic._model._rss = {};
-            
-        }
-        
-        
-        if (_topic._model._rss.loaded === true ) {
-            
-            let _components = _ui.get_components();
+      let _config = (_options.config !== undefined) ? _options.config : config_mod.get_current_config();
+      
+      if (_options.topic === undefined) {
+          throw ('topic option is required.');
+      }
+      let _topic = _options.topic;
+      
+      
+      if (_topic.url_feed === undefined) {    // Feed URL is required
+          return;
+      }
+      
+      if (_topic._model._rss === undefined) {   
+          _topic._model._rss = {};
+          
+      }
+      
+      
+      if (_topic._model._rss.loaded === true ) {
+          
+          let _components = _ui.get_components();
 
-            _components.posts_list.set_topic({
-                'topic': _topic
-            });
-            
-        } else {
-            
-            let _components = _ui.get_components();
+          _components.posts_list.set_topic({
+              'topic': _topic
+          });
+          
+          _components.blog_data.set_topic({
+              'topic': _topic
+          });
 
-            _components.posts_list.set_topic({
-                'loading': true
-            });
-            
-            rss_mod.get_TopicBlogEntries({
-                'topic': _topic
-            }).then(
-            function(_data){
-                _topic._model._rss.loaded = true;
-                _topic._model._rss.categories = _data.categories;
-                _topic._model._rss.feed = _data.feed;
-                
-                _components.posts_list.set_topic({
-                    'topic': _topic,
-                    'loading': false
-                });
-                
-                _components.blog_properties.set_topic({
-                    'topic': _topic
-                });
+          
+      } else {
+          
+          let _components = _ui.get_components();
 
-            }, 
-            function(_error){
-                _topic._model._rss.loaded = false;
-                _topic._model._rss._error = _error;
-                console.log(_error); // TODO: REMOVE DEBUG LOG
-            });
+          _components.posts_list.set_topic({
+              'loading': true
+          });
+          
+          _components.blog_data.set_topic({
+              'loading': true
+          });
+          
+          rss_mod.get_TopicBlogEntries({
+              'topic': _topic,
+              'analize': true
+          }).then(
+          function(_data){
+              _topic._model._rss.loaded = true;
+              _topic._model._rss.categories = _data.categories;
+              _topic._model._rss.feed = _data.feed;
+              _topic._model._rss.feed_DATA = _data.feed_DATA;
 
-        }
+              _components.posts_list.set_topic({
+                  'topic': _topic,
+                  'loading': false
+              });
+              
+              _components.blog_properties.set_topic({
+                  'topic': _topic
+              });
+              
+              _components.blog_data.set_topic({
+                  'topic': _topic,
+                  'loading': false
+              });
 
-    }   // EndOf _manage_rss
+          }, 
+          function(_error){
+              _topic._model._rss.loaded = false;
+              _topic._model._rss._error = _error;
+              console.log(_error); // TODO: REMOVE DEBUG LOG
+          }); // EndOf get_TopicBlogEntries
+
+      }
+
+  }   // EndOf _manage_rss
     
         
 };
 
 
 // module.exports = _ui;
+
+const _export_initialize_UI = _ui.initialize_UI;
+
+export {
+  _export_initialize_UI as initialize_UI
+};
 
 export default _ui;

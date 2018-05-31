@@ -113,10 +113,21 @@ class WAW_PostsList extends PolymerElement {
     
     _this.set('data.initialized', true);
     
-    // let _shadowRoot = _this.shadowRoot;
+    let _shadowRoot = _this.shadowRoot;
     
     // this.set('data._tabs', _shadowRoot.querySelectorAll('ul[role="tablist"] li.nav-item a.nav-link'));
     // this.set('data._tabs_contents', _shadowRoot.querySelectorAll('div.tab-content div[role="tabpanel"]'));
+    
+    this.set('data._button_filterby_Categories', _shadowRoot.querySelector('button[data-name="filterby_Categories"]'));
+    this.set('data._layer_filtered', _shadowRoot.querySelector('div[data-name="posts_count"] span[data-name="filtered"]'));
+
+    this.set('data._layer_loading', _shadowRoot.querySelector('div[data-name="loading"]'));
+    this.set('data._layer_pagination', _shadowRoot.querySelector('div[data-name="pagination"]'));
+    this.set('data._layer_posts_list', _shadowRoot.querySelector('div[data-name="posts_list"]'));
+    
+    this.set('data._buttons_prev', _shadowRoot.querySelectorAll('div[data-name="pagination"] a[data-name="previous"]'));
+    this.set('data._buttons_next', _shadowRoot.querySelectorAll('div[data-name="pagination"] a[data-name="next"]'));
+    
   }
   
   _init_pagination(_options) {
@@ -176,9 +187,11 @@ class WAW_PostsList extends PolymerElement {
       
       var _filter = _this.get('data.filter');
       
-      var _button = _JQ(_this.shadowRoot).find('button[data-name="filterby_Categories"]');
-      var _layer_filtered = _JQ(_this.shadowRoot).find('div[data-name="posts_count"] span[data-name="filtered"]');
-
+      // var _button = _JQ(_this.shadowRoot).find('button[data-name="filterby_Categories"]');
+      // var _layer_filtered = _JQ(_this.shadowRoot).find('div[data-name="posts_count"] span[data-name="filtered"]');
+      
+      let _button = this.get('data._button_filterby_Categories');
+      let _layer_filtered = this.get('data._layer_filtered');
 
       _JQ(_button).toggleClass( 'btn-success', _filter.enabled );
       _JQ(_button).toggleClass( 'active', _filter.enabled );
@@ -199,10 +212,14 @@ class WAW_PostsList extends PolymerElement {
       // Check options.loading
       var _loading = (_options.loading !== undefined) ? _options.loading : false;
 
-      var _layer_loading = _JQ(_this.shadowRoot).find('div[data-name="loading"]');
-      var _layer_pagination = _JQ(_this.shadowRoot).find('div[data-name="pagination"]');
-      var _layer_posts_list = _JQ(_this.shadowRoot).find('div[data-name="posts_list"]');
-
+      // var _layer_loading = _JQ(_this.shadowRoot).find('div[data-name="loading"]');
+      // var _layer_pagination = _JQ(_this.shadowRoot).find('div[data-name="pagination"]');
+      // var _layer_posts_list = _JQ(_this.shadowRoot).find('div[data-name="posts_list"]');
+      
+      let _layer_loading = this.get('data._layer_loading');
+      let _layer_pagination = this.get('data._layer_pagination');
+      let _layer_posts_list = this.get('data._layer_posts_list');
+      
       _JQ(_layer_loading).toggle(_loading);
       _JQ(_layer_pagination).toggle(!_loading);
       _JQ(_layer_posts_list).toggle(!_loading);
@@ -329,7 +346,8 @@ class WAW_PostsList extends PolymerElement {
   _get_categories_selected(_options) {
       
       var _this = this;
-      var _dom = Polymer.dom(_this).node.root;
+      // var _dom = Polymer.dom(_this).node.root;
+      let _shadowRoot = _this.shadowRoot;
       var _categories = _this.categories;
 
       var _JQ = jQuery;
@@ -352,7 +370,8 @@ class WAW_PostsList extends PolymerElement {
       
       
       // Show or hide categories layer
-      var _layer_categories = _JQ(_dom).find('nav[data-name="toolbar"] div[data-name="categories"]');
+      // var _layer_categories = _JQ(_dom).find('nav[data-name="toolbar"] div[data-name="categories"]');
+      var _layer_categories = _shadowRoot.querySelectorAll('nav[data-name="toolbar"] div[data-name="categories"]');
       
       if (_categories_selected.length > 0) {
           _JQ(_layer_categories).show();
@@ -644,13 +663,9 @@ class WAW_PostsList extends PolymerElement {
       _this.shadowRoot.querySelector('#pages_top').render();
       _this.shadowRoot.querySelector('#pages_down').render();
       
-      // Update 'next' and 'prev' buttons
-      // var _prev = _JQ(_this.shadowRoot).find('ul.pagination li[data-name="previous"]');
-      // var _next = _JQ(_this.shadowRoot).find('ul.pagination li[data-name="next"]');
-      
-      var _prev = _JQ(_this.shadowRoot).find('div[data-name="pagination"] a[data-name="previous"]');
-      var _next = _JQ(_this.shadowRoot).find('div[data-name="pagination"] a[data-name="next"]');
-      
+      // Update 'next' and 'prev' button
+      let _prev = this.get('data._buttons_prev');
+      let _next = this.get('data._buttons_next');
       
       if (_currentPage > 1) {
           _JQ(_prev).removeClass('disabled');
@@ -666,7 +681,11 @@ class WAW_PostsList extends PolymerElement {
       
       
       // Close details and properties
-      var _layer_post_options = _JQ(_this.shadowRoot).find('div[data-name="post-options"]');
+      // var _layer_post_options = _JQ(_this.shadowRoot).find('div[data-name="post-options"]');
+      
+      // let _layer_post_options = this.get('data._layer_post_options'); 
+      let _layer_post_options = _this.shadowRoot.querySelectorAll('div[data-name="post-options"]');
+      
       var _button_properties = _JQ(_layer_post_options).find('button[data-name="properties"]');
       var _layer_properties = _JQ(_layer_post_options).find('div[data-name="properties"]');
       var _button_detail = _JQ(_layer_post_options).find('button[data-name="detail"]');

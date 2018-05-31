@@ -80,6 +80,7 @@ class WAW_TopicsList extends PolymerElement {
     
     // this.set('data._tabs', _shadowRoot.querySelectorAll('ul[role="tablist"] li.nav-item a.nav-link'));
     // this.set('data._tabs_contents', _shadowRoot.querySelectorAll('div.tab-content div[role="tabpanel"]'));
+    
   }
   
   

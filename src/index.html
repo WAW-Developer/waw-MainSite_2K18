@@ -131,15 +131,18 @@
     };
       
       
-    var _init_App = function() {
+    var _init_App = function(_options) {
       
-        var _mainsite = waw.mainsite;
+        _options = (_options !== undefined) ? _options : {};
+        var _mainsite = waw_mainsite;
         var _JQ = jQuery;
+        
+        var _callback = (_options.callback !== undefined) ? _options.callback : function(){};
         
         _mainsite.config.initialize({
             'config': {
                 'jquery_Lib': jQuery,
-                'config_file': './js/config.json'
+                'config_file': './config/config.json'
             }
         });
         
@@ -168,6 +171,7 @@
         // Load configuration
         _mainsite.config.loadConfig().then(function(_data){
             _mainsite._tests.doSomeTests();
+            _callback();
         });
         
         // Hide loading and show the content
@@ -197,10 +201,16 @@
     _JQ(document).ready(function() {
 
       console.log("Document ready");    // TODO: REMOVE DEBUG LOG
+
+      _init_App({
+        'callback': function() {
+	          // Hide loading and show the content
+	          _JQ('article[data-name="loading"]').attr('hidden', 'true');
+	          _JQ('article[data-name="content"]').removeAttr('hidden');
+        }
+      });
       
-      // Hide loading and show the content
-      _JQ('article[data-name="loading"]').attr('hidden', 'true');
-      _JQ('article[data-name="content"]').removeAttr('hidden');
+
     });
 
 
@@ -261,7 +271,12 @@
 </article>
 
   <!-- Boostrap scripts -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!--   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
