@@ -141,7 +141,7 @@ class Template {
                   <p> 
                     All the information is stored on remote servers. This application only has a configuration file for access all the data by the client browser. 
                     <br/>
-                    <a href="https://github.com/WAW-Developer/waw-web-MainSite_2K17" class="btn btn-outline-primary">
+                    <a href="https://github.com/WAW-Developer/waw-MainSite_2K18" class="btn btn-outline-primary">
                         <span class="fa fa-code" aria-hidden="true"></span> go to code
                         <span class="fa fa-github" aria-hidden="true"></span>
                     </a>
