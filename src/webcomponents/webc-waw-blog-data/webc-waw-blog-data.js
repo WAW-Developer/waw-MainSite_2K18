@@ -385,6 +385,7 @@ class WAW_BlogData extends PolymerElement {
               
               if (_loading === false) {
                   _this._init_charts();
+                  console.info('Charts and data', _topic);  // TODO: REMOVE DEBUG LOG
               }
               
           } else {

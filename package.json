@@ -10,8 +10,8 @@
   "author": "WAW developer <waw.developer@gmail.com>",
   "license": "ISC",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/WAW-Developer/waw-MainSite_2K18.git"
+    "type": "git",
+    "url": "https://github.com/WAW-Developer/waw-MainSite_2K18.git"
   },
   "dependencies": {},
   "devDependencies": {
