@@ -197,12 +197,13 @@ let _rss_data = {
         
         _search_host = _sourceHosts.find(function (_item) { return _item.host === _options.host; });
         
-        if (_search_host !== undefined) {
+        if (_search_host !== undefined) { // if exists increment counter and add entry
           _search_host.count++;
           _search_host.entries.push(_options.entry);
-        } else {
+        } else {  // if is new add new object 
           _sourceHosts.push({
             'host': _options.host,
+            'link': _options.link,
             'count': 1,
             'entries': [_options.entry]
           });
@@ -219,11 +220,13 @@ let _rss_data = {
         
         // process each link
         _links.forEach(function(_link, _k) {
-          _item._model._rss_data.sourceHosts.push(_link.hostname);
-          _addToSourceHosts({
-            'host': _link.hostname,
-            'entry': _item
-          });
+          let _sourceHost_data = {
+              'host': _link.hostname,
+              'link': _link.protocol + '//' + _link.hostname,
+              'entry': _item              
+          };
+          _item._model._rss_data.sourceHosts.push(_sourceHost_data);
+          _addToSourceHosts(_sourceHost_data);
         });
         
       });
@@ -231,10 +234,10 @@ let _rss_data = {
       // order source hosts
       _sourceHosts.sort(function(_a, _b) {
           if (_a.count > _b.count) {
-              return 1;
+              return -1;
           }
           if (_a.count < _b.count) {
-              return -1;
+              return 1;
           }
           return 0;
       });
