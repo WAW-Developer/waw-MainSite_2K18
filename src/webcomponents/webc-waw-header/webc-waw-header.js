@@ -107,9 +107,7 @@ class WAW_Header extends PolymerElement {
   _itemclicked(_e, _detail) {
 
     var _this = this;
-//     var _data_target = jQuery(_e.srcElement).attr('data-target');
-    var _data_target = _e.model.__data._topic.id;
-
+    let _data_target = _e.model._topic.id;
     
     var _event_Detail = {
         'data-target': _data_target
@@ -119,12 +117,6 @@ class WAW_Header extends PolymerElement {
         'detail': _event_Detail
     }));
 
-//     _this.fire('itemclicked', {
-//         'data-target': _data_target
-//         });
-      
-      // .srcElement.childNodes["0"].data
-      // .srcElement.attributes[1]
   }
   
   
@@ -135,37 +127,37 @@ class WAW_Header extends PolymerElement {
   
   _click_buttonMenuToggle(_event) {
       
-      var _this = this;
-      let _shadowRoot = _this.shadowRoot;
+      let _shadowRoot = this.shadowRoot;
       var _JQ = jQuery;
       
-      let _button = _shadowRoot.querySelector('dbutton[data-name="buttonMenuToggle"]');
+      let _button = _shadowRoot.querySelector('button[data-name="buttonMenuToggle"]');
       let _layer = _shadowRoot.querySelector('div[data-name="menuCollapsable"]');
       
-      // var _button = _JQ(_this.shadowRoot).find('button[data-name="buttonMenuToggle"]');
-      // var _layer = _JQ(_this.shadowRoot).find('div[data-name="menuCollapsable"]');
-   
       _JQ(_layer).toggleClass('collapse');
-      _JQ(_layer).toggleClass('active');
+      _JQ(_button).toggleClass('active');
       
   }
   
   _click_dropdown(_event) {
     
+    let _shadowRoot = this.shadowRoot;
     let _JQ = jQuery;
     let _target = _event.target;
     
-    let _dropdown_menu = _JQ(_target).parent().find('div.dropdown-menu')[0];
-    
-    let _state = _dropdown_menu.getAttribute('data-state');
+    let _dropdown_menu = _JQ(_target).parent().find('div.dropdown-menu')[0];  // layer for dropdown menu
+    let _button = _shadowRoot.querySelector('a[data-toggle="dropdown"]');
+ 
+    let _state = _dropdown_menu.getAttribute('data-state'); // check state
     
     switch (_state) {
       case 'closed':
         _dropdown_menu.setAttribute('data-state', 'open');
+        _JQ(_button).addClass('active');
         break;
   
       default:
         _dropdown_menu.setAttribute('data-state', 'closed');
+        _JQ(_button).removeClass('active');
         break;
     }
 

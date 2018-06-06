@@ -52,7 +52,7 @@ class Template {
         data-name="buttonMenuToggle"
         on-click="_click_buttonMenuToggle">
         <span class="navbar-toggler-icon">
-            <i class="fa fa-bars" aria-hidden="true"></i>
+<!--             <i class="fa fa-bars" aria-hidden="true"></i> -->
         </span>
       </button>
       
