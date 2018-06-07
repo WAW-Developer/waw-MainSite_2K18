@@ -305,93 +305,12 @@ class WAW_BlogData extends PolymerElement {
   }
 
   
-  _init_chart_SourcesUsed(_options) {
-    
-    let _this = this;
-    let _JQ = jQuery;
-    
-    // Check options
-    _options = (_options === undefined) ? {} : _options;
-    
-    let _topic = _this.get('data.topic');
-    let _feed_DATA = _topic._model._rss.feed_DATA; 
-
-    // Destroy chart if exists...
-    let _chart_SourcesUsed_cache = this.get('data.chart_SourcesUsed');
-    if (_chart_SourcesUsed_cache !== undefined) { _chart_SourcesUsed_cache.destroy(); }
-
-    let _source_hosts = _feed_DATA.source_hosts;
-    let _max_items = 10; // only display the first 10 items
-    let _source_hosts_Used = _source_hosts.slice(0, _max_items); 
-    
-    let _chart_labels = [];
-    let _chart_data = [];
-
-    let _others = 0;  // counter for other items 
-    
-    _source_hosts_Used.forEach(function(_item, _i) {  // add items to chart data and labels
-        _chart_labels.push(_item.host);
-        _chart_data.push(_item.count);
-        _others++;
-    });
-    
-    // Add others to chat dta and labels
-    _others = _source_hosts.length - _others;
-    _chart_labels.push('others');
-    _chart_data.push(_others);
-    
-    let _layer_chart_SourcesUsed = this.get('data._layer_chart_SourcesUsed');
-    
-    var _data = {
-        labels: _chart_labels,
-        datasets: [
-          {
-            data: _chart_data,
-            backgroundColor: [
-              "#FF6384",
-              "#4BC0C0",
-              "#FFCE56",
-              "#E7E9ED",
-              "#36A2EB",
-              "#FF6384",
-              "#4BC0C0",
-              "#FFCE56",
-              "#E7E9ED",
-              "#36A2EB"
-            ],
-            hoverBackgroundColor: [
-              "#FF6384",
-              "#4BC0C0",
-              "#FFCE56",
-              "#E7E9ED",
-              "#36A2EB",
-              "#FF6384",
-              "#4BC0C0",
-              "#FFCE56",
-              "#E7E9ED",
-              "#36A2EB"
-            ]
-        }]
-    };
-    
-    let _chart_SourcesUsed = new Chart(_layer_chart_SourcesUsed, {
-        type: 'doughnut',
-        data: _data
-    });
-    
-    this.set('data.chart_SourcesUsed', _chart_SourcesUsed);
-    
-  }
-  
-  
   _init_charts(_options) {
       this._init_chart_CategoriesUsed();
       this._init_chart_CategoriesLinked();
       this._init_chart_PostsOverTime();
-      this._init_chart_SourcesUsed();
   }
 
-  
   
   _loading(_options) {
       
@@ -489,14 +408,13 @@ class WAW_BlogData extends PolymerElement {
       var _categories = (_options.categories !== undefined) ? _options.categories : _this.get('categories');
 
       // clear an array and add new values
-      _this.set('categories', []);
+      _this.set('categories', _categories);
       
-      
+      /*
       _categories.forEach(function(_item, _i){
-          
           _this.push('categories', _item);
       });
-      
+      */
       
   }    // EndOf set_categories       
   

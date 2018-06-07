@@ -233,13 +233,24 @@ let _rss_data = {
       
       // order source hosts
       _sourceHosts.sort(function(_a, _b) {
-          if (_a.count > _b.count) {
-              return -1;
-          }
-          if (_a.count < _b.count) {
-              return 1;
-          }
-          return 0;
+          
+        // first order by count
+        if (_a.count > _b.count) {
+            return -1;
+        }
+        if (_a.count < _b.count) {
+            return 1;
+        }
+        
+        // then order by host
+        if (_a.host > _b.host) {
+          return 1;
+        }
+        if (_a.host < _b.host) {
+            return -1;
+        }          
+          
+        return 0;
       });
       
       return _sourceHosts;

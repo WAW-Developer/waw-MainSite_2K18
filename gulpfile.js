@@ -66,12 +66,34 @@ gulp.task('copy_LibsFor_LitHTML', function(_done) {
   let _base_path = './node_modules/';
   
   gulp.src([
-      './node_modules/lit-html/**/*',
+      _base_path + '/lit-html/**/*',
       '!' + _base_path + '/lit-html/**/src/**/*',
       '!' + _base_path + '/lit-html/**/src'
       ],
 
-      { base : './node_modules/' })
+      { base : _base_path })
+      .pipe(gulp.dest(_target_path))
+      .on('end', _done);
+  
+});
+
+
+gulp.task('copy_LibsFor_LitElement', function(_done) {
+  
+  let _target_path = _WAW_Site.dist_Path + _WAW_Site.ThirdParty_Path; 
+  let _base_path = './node_modules/@polymer/';
+  
+  gulp.src([
+      _base_path + '/lit-element/**/*',
+      '!' + _base_path + '/lit-element/**/src/**/*',
+      '!' + _base_path + '/lit-element/**/src',
+      '!' + _base_path + '/lit-element/**/demo/**/*',
+      '!' + _base_path + '/lit-element/**/demo',
+      '!' + _base_path + '/lit-element/**/test/**/*',
+      '!' + _base_path + '/lit-element/**/test'
+      ],
+
+      { base : _base_path })
       .pipe(gulp.dest(_target_path))
       .on('end', _done);
   

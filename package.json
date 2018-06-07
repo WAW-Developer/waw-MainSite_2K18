@@ -13,8 +13,8 @@
     "type": "git",
     "url": "https://github.com/WAW-Developer/waw-MainSite_2K18.git"
   },
-  "dependencies": {},
   "devDependencies": {
+    "@polymer/lit-element": "^0.5.1",
     "@polymer/polymer": "^3.0.2",
     "@webcomponents/shadycss": "^1.2.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",

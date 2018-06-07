@@ -23,7 +23,8 @@ const _ui = {
       'topics_list': null,
       'blog_properties': null,
       'posts_list': null,
-      'blog_data': null
+      'blog_data': null,
+      'blog_sources': null
     },
 
     '_current_topic': {
@@ -280,6 +281,28 @@ const _ui = {
 
 
   },  // EndOf _initialize_blog_data
+  
+  
+  '_initialize_blog_sources': function(_options) {
+
+    _options = (_options !== undefined) ? _options : {};
+
+    if (_options.component === undefined) {
+        throw ('component option is required.');
+    }
+    let _component = _options.component;
+
+    let _config = (_options.config !== undefined) ? _options.config : config_mod.get_current_config();
+
+    let _JQ = _config.jquery_Lib;
+
+    let _element = _JQ(_component)[0];
+
+    _ui._components.blog_sources = _element;
+
+
+  },  // EndOf _initialize_blog_sources
+  
 
 
     'initialize_UI': function(_options) {
@@ -326,8 +349,13 @@ const _ui = {
         _ui._initialize_blog_data({
           'config': _config,
           'component': 'webc-waw-blog-data'
-      });
-
+        });
+        
+        _ui._initialize_blog_sources({
+          'config': _config,
+          'component': 'webc-waw-blog-sources'
+        });
+        
         _ui.set_current_topic({
             'isRootTopic': true,
             'topic': 'waw'
@@ -375,21 +403,21 @@ const _ui = {
             _current_topic._parent = null;  // root topic has no parent
 
         } else {
-            if (_isMainTopic === true) { // Topic is a main topic
-                _current_topic._parent = _ui.get_wawTopic();  // set parent to root topic
-            } else {
-                // if current topic has subtopics then a subtoptic is selected
-                if (_current_topic._topic.subtopics !== undefined) {
-                    _current_topic._parent = _current_topic._topic; // current topic become parent
-                }
+          if (_isMainTopic === true) { // Topic is a main topic
+            _current_topic._parent = _ui.get_wawTopic();  // set parent to root topic
+          } else {
+            // if current topic has subtopics then a subtoptic is selected
+            if (_current_topic._topic.subtopics !== undefined) {
+                _current_topic._parent = _current_topic._topic; // current topic become parent
             }
+          }
 
-            // get the topic from the subtopics
-            let _subtopics_parent = _current_topic._parent.subtopics;
-            _topic = rss_mod.get_TopicbyID({
-                'topics': _subtopics_parent,
-                'id': _topic_id
-            }).topic;
+          // get the topic from the subtopics
+          let _subtopics_parent = _current_topic._parent.subtopics;
+          _topic = rss_mod.get_TopicbyID({
+              'topics': _subtopics_parent,
+              'id': _topic_id
+          }).topic;
         }
 
 
@@ -469,6 +497,9 @@ const _ui = {
             'topic': _topic
         });
 
+        _components.blog_sources.set_topic({ // set topic in 'blog sources'
+            'topic': _topic
+        });
 
       } else {  // topic rss is not loaded
 
@@ -479,6 +510,10 @@ const _ui = {
         });
 
         _components.blog_data.set_topic({ // set component 'blog data' in loading state
+            'loading': true
+        });
+        
+        _components.blog_sources.set_topic({ // set component 'blog sources' in loading state
             'loading': true
         });
 
@@ -503,6 +538,11 @@ const _ui = {
           });
 
           _components.blog_data.set_topic({ // set topic into component 'blog data' and loading state to false
+              'topic': _topic,
+              'loading': false
+          });
+          
+          _components.blog_sources.set_topic({ // set topic into component 'blog sources' and loading state to false
               'topic': _topic,
               'loading': false
           });
