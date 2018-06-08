@@ -703,6 +703,14 @@ class WAW_PostsList extends PolymerElement {
       
       _JQ(_layer_detail).find('div[data-name="content"]').html('');
       _JQ(_layer_detail).attr('data-loaded', 'false');
+      
+      // Animate to header (is optional)
+      let _animateToscrollTop = (_options.animateToscrollTop !== undefined) ? _options.animateToscrollTop : false;
+      if (_animateToscrollTop === true) {
+        _JQ('html, body').animate({
+          scrollTop: _JQ(_this.shadowRoot.querySelectorAll('div[data-name="header"]')).offset().top
+        }, 200);
+      }
 
   }   // EndOf _paginate_goToPage
 
@@ -713,7 +721,8 @@ class WAW_PostsList extends PolymerElement {
       var _pageNum = _event.model.__data._page.pageNum;
       
       _this._paginate_gotoPage({
-          'currentPage': _pageNum
+          'currentPage': _pageNum,
+          'animateToscrollTop': true
       });
       
   }   // EndOf _clickButton_pagination_GotoPage
@@ -728,7 +737,8 @@ class WAW_PostsList extends PolymerElement {
       _currentPage--;
 
       _this._paginate_gotoPage({
-          'currentPage': _currentPage
+          'currentPage': _currentPage,
+          'animateToscrollTop': true
       });
       
   }   // EndOf _clickButton_pagination_Previous
@@ -743,7 +753,8 @@ class WAW_PostsList extends PolymerElement {
       _currentPage++;
 
       _this._paginate_gotoPage({
-          'currentPage': _currentPage
+          'currentPage': _currentPage,
+          'animateToscrollTop': true
       });
       
   }   // EndOf _clickButton_pagination_Next

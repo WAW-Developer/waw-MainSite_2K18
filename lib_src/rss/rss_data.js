@@ -33,7 +33,8 @@ let _rss_data = {
                   'ratio_entries_category': 0,
                   'top_categories_linked': [],
                   'years': 0,
-                  'entries_by_year': {}
+                  'entries_by_year': {},
+                  'source_hosts': []
                 };
                 
                 
@@ -91,14 +92,14 @@ let _rss_data = {
                     
                 });
                 
-                
+                // categories deviation and density
                 _categories.forEach(function(_item, _i) {
                     _item._model._rss_data.deviation_categories = Math.abs(_item.count - _feed_DATA.ratio_entries_category);
                     _item._model._rss_data.density_categories = _item.count / _categories_total_entries;
 
                 });
                 
-                
+                // Order categories linked
                 _feed_DATA.top_categories_linked.sort(function(_a,_b) {
                     var _rel_cat_a = _a._model._rss_data.related_categories;
                     var _rel_cat_b = _b._model._rss_data.related_categories;
@@ -111,7 +112,11 @@ let _rss_data = {
                     }
                     return 0;
                 });
-
+                
+                // Source hosts
+                _feed_DATA.source_hosts = _rss_data._analize_sources({
+                  'feed': _feed
+                });
                 
                 _resolve(_feed_DATA);
                 
@@ -120,7 +125,6 @@ let _rss_data = {
             }            
         });
     },
-    
     
     
     '_get_related_categories': function(_options) {
@@ -175,9 +179,83 @@ let _rss_data = {
         
         return _related_categories;
 
+    },
+    
+    
+    _analize_sources(_options) {
+      _options = (_options !== undefined) ? _options : {};
+      
+      let _feed = _options.feed;
+      let _domParser = new DOMParser();
+      let _doc = null;
+      let _links = null;
+      let _sourceHosts = [];
+      let _search_host = null;
+
+      // function for add to source hosts
+      var _addToSourceHosts = function(_options) {
+        
+        _search_host = _sourceHosts.find(function (_item) { return _item.host === _options.host; });
+        
+        if (_search_host !== undefined) { // if exists increment counter and add entry
+          _search_host.count++;
+          _search_host.entries.push(_options.entry);
+        } else {  // if is new add new object 
+          _sourceHosts.push({
+            'host': _options.host,
+            'link': _options.link,
+            'count': 1,
+            'entries': [_options.entry]
+          });
+        }
+      };
+      
+      // analize each feed entry
+      _feed.entries.forEach(function(_item, _i) {
+        
+        _doc = _domParser.parseFromString(_item.content, "text/html");
+        _links = _doc.querySelectorAll('a');
+        
+        _item._model._rss_data.sourceHosts = [];  // each entry has its own data for sourceHosts
+        
+        // process each link
+        _links.forEach(function(_link, _k) {
+          let _sourceHost_data = {
+              'host': _link.hostname,
+              'link': _link.protocol + '//' + _link.hostname,
+              'entry': _item              
+          };
+          _item._model._rss_data.sourceHosts.push(_sourceHost_data);
+          _addToSourceHosts(_sourceHost_data);
+        });
+        
+      });
+      
+      // order source hosts
+      _sourceHosts.sort(function(_a, _b) {
+          
+        // first order by count
+        if (_a.count > _b.count) {
+            return -1;
+        }
+        if (_a.count < _b.count) {
+            return 1;
+        }
+        
+        // then order by host
+        if (_a.host > _b.host) {
+          return 1;
+        }
+        if (_a.host < _b.host) {
+            return -1;
+        }          
+          
+        return 0;
+      });
+      
+      return _sourceHosts;
     }
-
-
+    
 };
 
 // module.exports = _rss_data;

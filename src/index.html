@@ -77,60 +77,12 @@
   <script type="module" src="webcomponents/webc-waw-topics-list/webc-waw-topics-list.js?v=<!-- @echo version -->"></script>
   <script type="module" src="webcomponents/webc-waw-posts-list/webc-waw-posts-list.js?v=<!-- @echo version -->"></script>
   <script type="module" src="webcomponents/webc-waw-blog-data/webc-waw-blog-data.js?v=<!-- @echo version -->"></script>
+  <script type="module" src="webcomponents/webc-waw-blog-sources/webc-waw-blog-sources.js?v=<!-- @echo version -->"></script>
   <script type="module" src="webcomponents/webc-waw-footer/webc-waw-footer.js?v=<!-- @echo version -->"></script>
 
   
   <script>
  
-     var _init_elements = function() {
-          
-        var _elements_required = [
-            './js/shadycss/apply-shim.html'
-        ];
-        
-        var _elements_base = [
-          './js/polymer/polymer.html',
-          './js/polymer/polymer-element.html',
-        ];
-
-        var _elements_used = [
-          './webcomponents/bs4/bs4-dropdown.html',
-          './webcomponents/bs4/bs4-tabs.html',
-          './webcomponents/bs4/bs4-modal.html'
-        ];        
-          
-        var _elements = [
-          './webcomponents/waw-header.html',
-          './webcomponents/waw-topic-detail.html',
-          './webcomponents/waw-topics-list.html',
-          './webcomponents/waw-blog-properties.html',
-          './webcomponents/waw-posts-list.view.html',
-          './webcomponents/waw-posts-list.control.html',
-          './webcomponents/waw-footer.html'
-        ];
-        
-        
-        _loadLinks(_elements_required, {'cache':true}).then(function(_e1) {
-            _loadLinks(_elements_base, {'cache':true}).then(function(_e2) {
-                _loadLinks(_elements_used, {'cache':true}).then(function(_e2) {
-                    _loadLinks(_elements).then(function(_e4) {
-                        _init_App();
-                    });
-                });
-            });
-        });
-
-        /*
-        _loadLinks(_elements_base, {'cache':true}).then(function(_e3) {
-          _loadLinks(_elements).then(function(_e4) {
-              _init_App();
-          });
-        });
-       */
-        
-    };
-      
-      
     var _init_App = function(_options) {
       
         _options = (_options !== undefined) ? _options : {};
@@ -139,58 +91,21 @@
         
         var _callback = (_options.callback !== undefined) ? _options.callback : function(){};
         
-        _mainsite.config.initialize({
+        _mainsite.config.initialize({ // initialize configuration
             'config': {
                 'jquery_Lib': jQuery,
                 'config_file': './config/config.json?v=<!-- @echo version -->'
             }
         });
         
-        _mainsite._tests = {};
-        
-        _mainsite._tests.load_feed = function(_options) {
-            _mainsite.rss.load_feed({
-                'url': 'https://wabout-justice.blogspot.com/feeds/posts/default'
-            }).then(
-                function(_data){
-                    console.log(_data); // TODO: REMOVE DEBUG LOG 
-                }, 
-                function(_error){
-                    console.log(_error); // TODO: REMOVE DEBUG LOG
-                });
-        };
-        
-        
-        // Do some tests
-        _mainsite._tests.doSomeTests = function(_options) {
-//             _mainsite._tests.load_feed();
-            _mainsite.ui.initialize_UI();
-            
-        };
-        
         // Load configuration
         _mainsite.config.loadConfig().then(function(_data){
-            _mainsite._tests.doSomeTests();
-            _callback();
+          _mainsite.ui.initialize_UI();
+          _callback();
         });
         
-        // Hide loading and show the content
-        _JQ('article[data-name="loading"]').attr('hidden', 'true');
-        _JQ('article[data-name="content"]').removeAttr('hidden');
-       
     };
     
-    
-    
-  /*
-  window.addEventListener('WebComponentsReady', function() {
-    // At this point we are guaranteed that all required polyfills have loaded,
-    // all HTML imports have loaded, and all defined custom elements have upgraded
-    _init_polyfill(_init_elements);
-
-  });  
-  */
-  
   
   window.addEventListener('WebComponentsReady', function(e) {
     // imports are loaded and elements have been registered
@@ -204,9 +119,9 @@
 
       _init_App({
         'callback': function() {
-	          // Hide loading and show the content
-	          _JQ('article[data-name="loading"]').attr('hidden', 'true');
-	          _JQ('article[data-name="content"]').removeAttr('hidden');
+            // Hide loading and show the content
+            _JQ('article[data-name="loading"]').attr('hidden', 'true');
+            _JQ('article[data-name="content"]').removeAttr('hidden');
         }
       });
       
@@ -258,6 +173,10 @@
     <webc-waw-blog-data></webc-waw-blog-data>
   </div>
   
+  <div class="container-fluid" style="padding: 0px;">
+    <webc-waw-blog-sources></webc-waw-blog-sources>
+  </div>
+  
     
   <div class="container-fluid row justify-content-end" style="padding: 0px;">
 <!--     <div class="col-xs-12 col-sm-7 col-md-8">b</div> -->
@@ -273,9 +192,9 @@
   <!-- Boostrap scripts -->
 <!--   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
   <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>

@@ -3,18 +3,16 @@
 // Import the html helper
 import {html} from '../../thirds/polymer/polymer-element.js';
 
+// Import common templates
+import _commonTemplates from '../webc-waw-common/webc-waw-common-templates.js';
 
 class Template {
   
   static get fragment() {
     return html`
       
-	    <!-- Boostrap -->
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-	    
-	    <!-- Font awesome -->
-	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />      
-      
+      <!-- Common templates -->
+      ${_commonTemplates.fragmentFor_CSS}
       
       <style>
       /* local styles go here */
@@ -23,6 +21,12 @@ class Template {
       }
       
       
+      /* need resize using javascript
+      canvas[data-type="chart"] {
+        height: 90%;
+        width: 90%;
+      }
+      */
          
       @media (max-width: 575px) { 
       
@@ -80,7 +84,7 @@ class Template {
               Loading <span class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></span>
             </div>
             <div class="card-text" data-name="content">
-                <canvas width="90%" height="90%" data-name="chart_CategoriesUsed">
+                <canvas width="90%" height="90%" data-type="chart" data-name="chart_CategoriesUsed">
                 </canvas>            
             </div>
           </div>
@@ -97,7 +101,7 @@ class Template {
               Loading <span class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></span>
             </div>
             <div class="card-text" data-name="content">
-                <canvas width="90%" height="90%" data-name="chart_CategoriesLinked">
+                <canvas width="90%" height="90%" data-type="chart" data-name="chart_CategoriesLinked">
                 </canvas>            
             </div>
           </div>
@@ -114,7 +118,7 @@ class Template {
               Loading <span class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></span>
             </div>
             <div class="card-text" data-name="content">
-                <canvas width="90%" height="90%" data-name="chart_PostsOverTime">
+                <canvas width="90%" height="90%" data-type="chart" data-name="chart_PostsOverTime">
                 </canvas>            
             </div>
           </div>
@@ -122,6 +126,7 @@ class Template {
       </div>
       
     </div>
+    
     `;
   }
   

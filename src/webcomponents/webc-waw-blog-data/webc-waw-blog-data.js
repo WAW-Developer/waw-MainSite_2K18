@@ -93,7 +93,8 @@ class WAW_BlogData extends PolymerElement {
     this.set('data._layer_chart_CategoriesUsed', _shadowRoot.querySelector('canvas[data-name="chart_CategoriesUsed"]'));
     this.set('data._layer_chart_CategoriesLinked', _shadowRoot.querySelector('canvas[data-name="chart_CategoriesLinked"]'));
     this.set('data._layer_chart_PostsOverTime', _shadowRoot.querySelector('canvas[data-name="chart_PostsOverTime"]'));
-
+    this.set('data._layer_chart_SourcesUsed', _shadowRoot.querySelector('canvas[data-name="chart_SourcesUsed"]'));
+    
   }
   
   _init_chart_CategoriesUsed(_options) {
@@ -304,15 +305,12 @@ class WAW_BlogData extends PolymerElement {
   }
 
   
-  
   _init_charts(_options) {
-      var _this = this;
-      _this._init_chart_CategoriesUsed();
-      _this._init_chart_CategoriesLinked();
-      _this._init_chart_PostsOverTime();
+      this._init_chart_CategoriesUsed();
+      this._init_chart_CategoriesLinked();
+      this._init_chart_PostsOverTime();
   }
 
-  
   
   _loading(_options) {
       
@@ -385,6 +383,7 @@ class WAW_BlogData extends PolymerElement {
               
               if (_loading === false) {
                   _this._init_charts();
+                  console.info('Charts and data', _topic);  // TODO: REMOVE DEBUG LOG
               }
               
           } else {
@@ -409,14 +408,13 @@ class WAW_BlogData extends PolymerElement {
       var _categories = (_options.categories !== undefined) ? _options.categories : _this.get('categories');
 
       // clear an array and add new values
-      _this.set('categories', []);
+      _this.set('categories', _categories);
       
-      
+      /*
       _categories.forEach(function(_item, _i){
-          
           _this.push('categories', _item);
       });
-      
+      */
       
   }    // EndOf set_categories       
   
