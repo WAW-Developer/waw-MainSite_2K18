@@ -417,7 +417,7 @@ class WAW_PostsList extends PolymerElement {
       _category._model._selected = false;
       _this.set_categories();
       
-      _this.dispatchEvent(new CustomEvent('catepgoryclicked', {
+      _this.dispatchEvent(new CustomEvent('categoryclicked', {
           'detail': {
               'category': _category
           }

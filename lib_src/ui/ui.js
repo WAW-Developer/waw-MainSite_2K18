@@ -211,8 +211,8 @@ const _ui = {
         let _element = _JQ(_component)[0];
 
 
-        // Map event 'catepgoryclicked'
-        _JQ(_element).on('catepgoryclicked', function(_event, _data) {
+        // Map event 'categoryclicked'
+        _JQ(_element).on('categoryclicked', function(_event, _data) {
 
             let _event_detail = _event.originalEvent.detail;
 
@@ -250,8 +250,8 @@ const _ui = {
             _ui.get_components().blog_properties.set_topic();
         });
 
-        // Map event 'catepgoryclicked'
-        _JQ(_element).on('catepgoryclicked', function(_event, _data) {
+        // Map event 'categoryclicked'
+        _JQ(_element).on('categoryclicked', function(_event, _data) {
 
             _ui.get_components().blog_properties.set_topic();
         });
@@ -356,9 +356,10 @@ const _ui = {
           'component': 'webc-waw-blog-sources'
         });
         
-        _ui.set_current_topic({
+        _ui.set_current_topic({ // Set the current topic to root
             'isRootTopic': true,
-            'topic': 'waw'
+            'topic': 'waw',
+            'scrollToTop': true
         });
 
     },
@@ -461,10 +462,14 @@ const _ui = {
             });
         }
         
-        // Animate to header
-        _JQ('html, body').animate({
-          scrollTop: _JQ(_components.header).offset().top
-        }, 200);
+        
+        // Animate to header (is optional and true by default)
+        let _scrollToTop = (_options.scrollToTop !== undefined) ? _options.scrollToTop : true;
+        if (_scrollToTop) {
+          _JQ('html, body').animate({
+            scrollTop: 0
+          }, 200);          
+        }
 
     },  // EndOf set_current_topic
 

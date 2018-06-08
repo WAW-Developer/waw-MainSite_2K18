@@ -116,22 +116,22 @@ class Template {
           </div>
           
           <div class="card-text" data-name="content">
-	          <template id="categories_list" is="dom-repeat" items="{{categories}}" as="_category" index-as="_catagory_no">
-	            
-	  <!--             <a href="javascript:void(null);"> -->
-	  <!--             <span class="label label-default">{{_category.name}}<span class="badge">{{_category.posts.length}}</span></span> -->
-	  <!--             </a> -->
-	            
-	            <a class$="btn {{_category_Class(_category._model._selected)}}"
-	                href="javascript:void(null);"
-	                style="margin: 2px;"
-	                on-click="_clickcategory">
-	              {{_category.name}} 
-	              <span class="badge badge-pill badge-default small" 
-	                style="color: black; background-color: #F1F1F1;">{{_category.posts.length}}</span>
-	            </a>
-	            
-	          </template>
+            <template id="categories_list" is="dom-repeat" items="{{categories}}" as="_category" index-as="_catagory_no">
+              
+    <!--             <a href="javascript:void(null);"> -->
+    <!--             <span class="label label-default">{{_category.name}}<span class="badge">{{_category.posts.length}}</span></span> -->
+    <!--             </a> -->
+              
+              <a class$="btn {{_category_Class(_category._model._selected)}}"
+                  href="javascript:void(null);"
+                  style="margin: 2px;"
+                  on-click="_clickcategory">
+                {{_category.name}} 
+                <span class="badge badge-pill badge-default small" 
+                  style="color: black; background-color: #F1F1F1;">{{_category.posts.length}}</span>
+              </a>
+              
+            </template>
           </div>
           
           

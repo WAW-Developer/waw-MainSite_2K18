@@ -254,8 +254,8 @@ export class WAW_BlogSources extends PolymerElement {
         });
       }
       
-      // _this.shadowRoot.querySelector('div[data-name="content"]').scrollTop = 0; // Scroll to top
-      _JQ(_this.shadowRoot.querySelector('div[data-name="content"]')).scrollTop(0);
+      _this.shadowRoot.querySelector('div[data-name="content"]').scrollTop = 0; // Scroll to top (not working)
+      // _JQ(_this.shadowRoot.querySelector('div[data-name="content"]')).scrollTop(0);
       
     });
     

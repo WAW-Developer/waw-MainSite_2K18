@@ -17,13 +17,13 @@ class Template {
 
     <style>
     /* local styles go here */
-		/*       :host { */
-		/*         display: block; */
-		/*       } */
-		  div[data-name="image"] {
+    /*       :host { */
+    /*         display: block; */
+    /*       } */
+      div[data-name="image"] {
         text-align: center;
         max-height: 61pt;
-		  }
+      }
     </style>
 
 
