@@ -59,16 +59,16 @@ class Template {
                 Loading <span class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></span>
               </div>
               <div class="card-text" data-name="content">
-                
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> Sources: <span class="badge badge-pill badge-secondary">{{sources.length}}</span> <br>
                 <template is="dom-repeat" items="{{sources}}" as="_source" index-as="_source_no" mutable-data>
 								  <div class="card">
 				            <div class="card-header">
-				              <h3 class="panel-title"> {{_source.host}} 
+				              <h5 class="panel-title"> {{_source.host}} 
 				                <span class="badge badge-pill badge-info">{{_source.count}}</span>
 				                <a href="{{_source.link}}" target="_blank" class="badge badge-pill badge-dark">
 				                  <i class="fa fa-external-link" aria-hidden="true"></i>
 			                  </a>
-				              </h3>
+				              </h5>
 				            </div>
 								  </div>
 								</template>

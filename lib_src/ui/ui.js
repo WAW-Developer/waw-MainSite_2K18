@@ -369,6 +369,8 @@ const _ui = {
         _options = (_options !== undefined) ? _options : {};
 
         let _config = (_options.config !== undefined) ? _options.config : config_mod.get_current_config();
+        
+        let _JQ = jQuery;
 
         if (_options.topic === undefined) {
             throw ('topic option is required.');
@@ -458,6 +460,11 @@ const _ui = {
                 'topics': _topic.subtopics
             });
         }
+        
+        // Animate to header
+        _JQ('html, body').animate({
+          scrollTop: _JQ(_components.header).offset().top
+        }, 200);
 
     },  // EndOf set_current_topic
 

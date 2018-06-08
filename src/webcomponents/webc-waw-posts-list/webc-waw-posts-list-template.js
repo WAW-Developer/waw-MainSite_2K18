@@ -36,7 +36,7 @@ class Template {
     
     <div class="card">
       
-      <div class="card-header">
+      <div class="card-header" data-name="header">
         <h3>Posts list</h3>
       </div>
       

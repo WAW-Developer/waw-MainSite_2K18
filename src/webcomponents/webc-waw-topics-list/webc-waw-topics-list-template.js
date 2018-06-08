@@ -20,6 +20,10 @@ class Template {
 		/*       :host { */
 		/*         display: block; */
 		/*       } */
+		  div[data-name="image"] {
+        text-align: center;
+        max-height: 61pt;
+		  }
     </style>
 
 
@@ -38,7 +42,7 @@ class Template {
           
             <div>
               <div class="img-thumbnail w-25 float-right" 
-                style="max-height: 172px;">
+                data-name="image">
                 <img alt="..." class$="img-fluid {{_topicImage_Class(_topic._model.selected)}}"
                   style="max-height: 53pt;" 
                   src$="resources/images/{{_topic.iconImage}}">

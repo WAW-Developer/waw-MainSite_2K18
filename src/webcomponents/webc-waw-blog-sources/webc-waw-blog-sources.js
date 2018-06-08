@@ -253,7 +253,10 @@ export class WAW_BlogSources extends PolymerElement {
           'sources': []
         });
       }
-        
+      
+      // _this.shadowRoot.querySelector('div[data-name="content"]').scrollTop = 0; // Scroll to top
+      _JQ(_this.shadowRoot.querySelector('div[data-name="content"]')).scrollTop(0);
+      
     });
     
   } // EndOf set_topic

@@ -217,6 +217,7 @@ export class WAW_BlogSources extends LitElement {
           'sources': []
         });
       }
+      
         
     });
     
