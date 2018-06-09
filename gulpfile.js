@@ -8,7 +8,7 @@ var preprocess = require('gulp-preprocess');
 const _WAW_Site = {
     dist_Path: './public/',
     ThirdParty_Path: 'thirds/',
-    build: '0011'
+    build: '0012'
 };
 
 

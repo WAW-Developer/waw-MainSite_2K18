@@ -23,10 +23,10 @@ class Template {
 /*       } */
 
       /* Show the dropdown menu on hover */
-			/*
-			div.dropdown:hover div.dropdown-menu {
-			    display: block;
-			}
+      /*
+      div.dropdown:hover div.dropdown-menu {
+          display: block;
+      }
       */
 
       div.dropdown div.dropdown-menu[data-state="closed"] {

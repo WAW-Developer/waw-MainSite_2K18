@@ -243,10 +243,10 @@ let _rss_data = {
         }
         
         // then order by host
-        if (_a.host > _b.host) {
+        if (_a.host.toLowerCase() > _b.host.toLowerCase()) {
           return 1;
         }
-        if (_a.host < _b.host) {
+        if (_a.host.toLowerCase() < _b.host.toLowerCase()) {
             return -1;
         }          
           

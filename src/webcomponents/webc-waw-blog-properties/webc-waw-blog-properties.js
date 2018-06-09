@@ -248,8 +248,8 @@ class WAW_BlogProperties extends PolymerElement {
       
         case "name":
             _categories.sort(function(a, b) {
-              if (a.name < b.name) return -1;
-              if (a.name > b.name) return 1;
+              if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+              if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
               return 0;
           });
           break;
@@ -258,6 +258,8 @@ class WAW_BlogProperties extends PolymerElement {
             _categories.sort(function(a, b) {
               if (a.count > b.count) return -1;
               if (a.count < b.count) return 1;
+              if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;  // and also by name
+              if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
               return 0;
           });
           break;
@@ -289,45 +291,17 @@ class WAW_BlogProperties extends PolymerElement {
       
       var _button = _JQ(_event_source).closest('a');
       
-      /*
-      if (_category._model._selected !== true) {
-          
-          _JQ(_button).removeClass( 'btn-link' );
-          _JQ(_button).addClass( 'bg-success' );
-          _category._model._selected = true;
-          
-      } else {
-          
-          _JQ(_button).removeClass( 'bg-success' );
-          _JQ(_button).addClass( 'btn-link' );
-          _category._model._selected = false;
-      }
-      */
-      
-//       _JQ(_button).toggleClass( 'btn-outline-warning', !!_category._model._selected );
-//       _JQ(_button).toggleClass( 'btn-outline-secondary', !_category._model._selected );
-      
       _category._model._selected = !_category._model._selected;
       
       _this.set_categories();
-      
-//       _this.shadowRoot.querySelector('#categories_list').render();
-      
-//       _JQ(_button).refresh();
-//       _this.set_categories();
-//       _this.shadowRoot.querySelector('#categories_list').render();
       
       var _event_Detail = {
           'category': _category
       };
 
-      _this.dispatchEvent(new CustomEvent('catepgoryclicked', {
+      _this.dispatchEvent(new CustomEvent('categoryclicked', {
           'detail': _event_Detail
       }));
-      
-//       _this.fire('catepgoryclicked', {
-//           'category': _category
-//           });
       
       
   }    // EndOf _clickcategory
