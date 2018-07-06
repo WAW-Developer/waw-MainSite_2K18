@@ -10,7 +10,7 @@ import {afterNextRender} from '../../thirds/polymer/lib/utils/render-status.js';
 import '../../thirds/polymer/lib/elements/dom-repeat.js';
 
 // Import template
-import _template from './webc-waw-blog-sources-template.js';
+import _template from './webc-waw-blog-sources-template.js?v=/* @echo version */';
 
 
 export class WAW_BlogSources extends PolymerElement {
@@ -254,8 +254,13 @@ export class WAW_BlogSources extends PolymerElement {
         });
       }
       
-      _this.shadowRoot.querySelector('div[data-name="content"]').scrollTop = 0; // Scroll to top (not working)
+      // _this.shadowRoot.querySelector('div[data-name="content"]').scrollTop = 0; // Scroll to top (not working)
       // _JQ(_this.shadowRoot.querySelector('div[data-name="content"]')).scrollTop(0);
+      let _layerForList = _this.shadowRoot.querySelector('div[data-name="list"]');  // Scroll to top (working with jquery)
+      _JQ(_layerForList).animate({
+        scrollTop: 0
+      }, 200); 
+      
       
     });
     
@@ -274,6 +279,8 @@ export class WAW_BlogSources extends PolymerElement {
 
     // clear an array and add new values
     this.set('sources', _sources);
+    
+    
     
   } // EndOf _set_sources 
   

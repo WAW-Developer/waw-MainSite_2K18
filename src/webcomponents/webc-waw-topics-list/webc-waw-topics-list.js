@@ -10,7 +10,7 @@ import {afterNextRender} from '../../thirds/polymer/lib/utils/render-status.js';
 import '../../thirds/polymer/lib/elements/dom-repeat.js';
 
 // Import template
-import _template from './webc-waw-topics-list-template.js';
+import _template from './webc-waw-topics-list-template.js?v=/* @echo version */';
 
 
 class WAW_TopicsList extends PolymerElement {
@@ -93,10 +93,6 @@ class WAW_TopicsList extends PolymerElement {
         'topic': _data_target
     });
     
-//     _this.fire('itemclicked', {
-//         'data-target': _data_target
-//         });
-      
     var _event_Detail = {
         'data-target': _data_target
     };
@@ -104,11 +100,7 @@ class WAW_TopicsList extends PolymerElement {
     _this.dispatchEvent(new CustomEvent('itemclicked', {
         'detail': _event_Detail
     }));
-
     
-    
-      // .srcElement.childNodes["0"].data
-      // .srcElement.attributes[1]
   }
   
   

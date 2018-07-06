@@ -4,7 +4,7 @@
 import {html} from '../../thirds/polymer/polymer-element.js';
 
 // Import common templates
-import _commonTemplates from '../webc-waw-common/webc-waw-common-templates.js';
+import _commonTemplates from '../webc-waw-common/webc-waw-common-templates.js?v=/* @echo version */';
 
 
 class Template {

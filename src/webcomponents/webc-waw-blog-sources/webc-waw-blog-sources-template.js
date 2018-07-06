@@ -4,7 +4,7 @@
 import {html} from '../../thirds/polymer/polymer-element.js';
 
 // Import common templates
-import _commonTemplates from '../webc-waw-common/webc-waw-common-templates.js';
+import _commonTemplates from '../webc-waw-common/webc-waw-common-templates.js?v=/* @echo version */';
 
 class Template {
   
@@ -22,7 +22,7 @@ class Template {
         }
         
         
-        div[data-name="sources-list"] div[data-name="content"] {
+        div[data-name="sources-list"] div[data-name="list"]{
          max-height: 400pt;
          overflow-y: auto;
         }
@@ -58,23 +58,30 @@ class Template {
               <div class="card-text" data-name="loading" style="display: none; float: left;">
                 Loading <span class="fa fa-cog fa-spin fa-fw" aria-hidden="true"></span>
               </div>
+              
               <div class="card-text" data-name="content">
-                <i class="fa fa-file-text-o" aria-hidden="true"></i> Sources: <span class="badge badge-pill badge-secondary">{{sources.length}}</span> <br>
-                <template is="dom-repeat" items="{{sources}}" as="_source" index-as="_source_no" mutable-data>
-                  <div class="card">
-                    <div class="card-header">
-                      <h5 class="panel-title"> {{_source.host}} 
-                       <span class="badge badge-pill badge-info">{{_source.count}}</span>
-                          <a href="{{_source.link}}" target="_blank" class="badge badge-pill badge-dark">
-                          <i class="fa fa-external-link" aria-hidden="true"></i>
-                        </a>
-                      </h5>
-                    </div>
-                  </div>
-                </template>
+                <div class="card-text">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i> Sources: <span class="badge badge-pill badge-secondary">{{sources.length}}</span> <br>
+                </div>
                 
-              </div>
-            </div>
+                <div class="card-text" data-name="list">
+	                <template is="dom-repeat" items="{{sources}}" as="_source" index-as="_source_no" mutable-data>
+	                  <div class="card">
+	                    <div class="card-header">
+	                      <h5 class="panel-title"> {{_source.host}} 
+	                       <span class="badge badge-pill badge-info">{{_source.count}}</span>
+	                          <a href="{{_source.link}}" target="_blank" class="badge badge-pill badge-dark">
+	                          <i class="fa fa-external-link" aria-hidden="true"></i>
+	                        </a>
+	                      </h5>
+	                    </div>
+	                  </div>
+	                </template>
+                </div>  <!-- EndOf "list" -->
+                
+              </div> <!-- EndOf "content" -->
+              
+            </div>  <!-- EndOf "body" -->
           </div>
         
         </div>

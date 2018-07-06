@@ -11,7 +11,7 @@ import '../../thirds/polymer/lib/elements/dom-repeat.js';
 
 
 //Import template
-import _template from './webc-waw-header-template.js';
+import _template from './webc-waw-header-template.js?v=/* @echo version */';
 
 class WAW_Header extends PolymerElement {
   static get is() { return "webc-waw-header"; }
