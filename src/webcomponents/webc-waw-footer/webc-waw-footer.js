@@ -10,7 +10,7 @@ import {afterNextRender} from '../../thirds/polymer/lib/utils/render-status.js';
 import '../../thirds/polymer/lib/elements/dom-repeat.js';
 
 // Import template
-import _template from './webc-waw-footer-template.js';
+import _template from './webc-waw-footer-template.js?v=/* @echo version */';
 
 
 class WAW_Footer extends PolymerElement {

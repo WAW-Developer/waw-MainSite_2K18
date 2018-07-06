@@ -7,7 +7,7 @@ import {PolymerElement, html} from '../../thirds/polymer/polymer-element.js';
 import {afterNextRender} from '../../thirds/polymer/lib/utils/render-status.js';
 
 // Import template
-import _template from './webc-waw-blog-data-template.js';
+import _template from './webc-waw-blog-data-template.js?v=/* @echo version */';
 
 
 class WAW_BlogData extends PolymerElement {

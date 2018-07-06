@@ -8,7 +8,7 @@ import {afterNextRender} from '../../thirds/polymer/lib/utils/render-status.js';
 
 
 // Import template
-import _template from './webc-waw-topic-detail-template.js';
+import _template from './webc-waw-topic-detail-template.js?v=/* @echo version */';
 
 class WAW_TopicDetail extends PolymerElement {
   static get is() { return "webc-waw-topic-detail"; }
