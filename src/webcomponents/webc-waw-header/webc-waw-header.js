@@ -100,6 +100,17 @@ class WAW_Header extends PolymerElement {
     
     this.set('data._modalFor_AboutWeb', _shadowRoot.querySelector('div.modal[data-name="aboutweb"]'));
     this.set('data._modalFor_AboutWAW', _shadowRoot.querySelector('div.modal[data-name="aboutwaw"]'));
+    
+    // Close drop-down-menu
+    // @see https://stackoverflow.com/questions/6463486/jquery-drop-down-menu-closing-by-clicking-outside
+    _JQ('body').on('click', function (_e) {
+      _shadowRoot.querySelectorAll('div.dropdown-menu').forEach((_item) => {
+        _item.setAttribute('data-state', 'closed');
+      });
+      _shadowRoot.querySelectorAll('a[data-toggle="dropdown"]').forEach((_item) => {
+        _JQ(_item).removeClass('active');
+      });      
+    });
 
   }
   
@@ -144,8 +155,10 @@ class WAW_Header extends PolymerElement {
     let _JQ = jQuery;
     let _target = _event.target;
     
+    _event.stopPropagation();
+    
     let _dropdown_menu = _JQ(_target).parent().find('div.dropdown-menu')[0];  // layer for dropdown menu
-    let _button = _shadowRoot.querySelector('a[data-toggle="dropdown"]');
+    let _button = _JQ(_target).parent().find('a[data-toggle="dropdown"]')[0];  // button for dropdown
  
     let _state = _dropdown_menu.getAttribute('data-state'); // check state
     

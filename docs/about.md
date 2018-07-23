@@ -16,7 +16,7 @@ This documents will be updated in the future.
 
 
 ## Git repositories for team development
-Actually the code is located in a **private repository** at github service.
+Actually the code is located in a **private repository** at bitbucket service.
 
 The **published branch is "master"** but this documentation belongs to **"develop" branch** that is the **current active** one.
 
