@@ -98,6 +98,7 @@ class Template {
                   <span class="fa fa-ellipsis-v" aria-hidden="true"></span> Settings
               </a>
               <div class="dropdown-menu dropdown-menu-right"
+                data-name="dropdown-menu-layer"
                 data-state="closed" 
                 aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="javascript:void(null);" 
